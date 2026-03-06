@@ -1,0 +1,2615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Silver Tours</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ================= GLOBAL ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:linear-gradient(to bottom,#ffffff,#f3f3f3);
+    color:#333;
+    overflow-x:hidden;
+}
+
+section{
+    padding:100px 8%;
+    position:relative;
+}
+
+h2{
+    font-size:42px;
+    margin-bottom:20px;
+    text-align:center;
+}
+
+/* ================= NAVBAR ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(10px);
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    z-index:1000;
+}
+
+nav h2{
+    font-size:26px;
+    background:linear-gradient(45deg,silver,#999);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+    transition:0.4s;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+    position:relative;
+    transition:0.3s;
+}
+
+nav ul li a::after{
+    content:'';
+    position:absolute;
+    bottom:-5px;
+    left:0;
+    width:0;
+    height:2px;
+    background:silver;
+    transition:0.3s;
+}
+
+nav ul li a:hover{
+    color:silver;
+}
+
+nav ul li a:hover::after{
+    width:100%;
+}
+
+/* ================= HAMBURGER ================= */
+
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:6px;
+    cursor:pointer;
+}
+
+.hamburger span{
+    width:26px;
+    height:3px;
+    background:#333;
+    transition:0.3s;
+}
+
+.hamburger.active span:nth-child(1){
+    transform:rotate(45deg) translate(5px,5px);
+}
+.hamburger.active span:nth-child(2){
+    opacity:0;
+}
+.hamburger.active span:nth-child(3){
+    transform:rotate(-45deg) translate(6px,-6px);
+}
+
+/* ================= MOBILE MENU ================= */
+
+@media(max-width:900px){
+
+    .hamburger{
+        display:flex;
+    }
+
+    nav ul{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:260px;
+        height:100vh;
+        background:white;
+        flex-direction:column;
+        padding:120px 30px;
+        gap:25px;
+        box-shadow:-5px 0 30px rgba(0,0,0,0.1);
+    }
+
+    nav ul.show{
+        right:0;
+    }
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center/cover;
+    position:relative;
+    color:white;
+}
+
+.hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.5);
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    animation:fadeSlide 2s ease forwards;
+}
+
+@keyframes fadeSlide{
+    from{opacity:0; transform:translateY(-50px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
+.glow-btn{
+    padding:14px 30px;
+    border:none;
+    border-radius:30px;
+    background:silver;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(192,192,192,0.7);
+    transition:0.4s;
+}
+
+.glow-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 35px rgba(192,192,192,1);
+}
+
+/* ===== HERO ENHANCEMENTS ===== */
+
+.hero{
+    overflow:hidden;
+    position:relative;
+}
+
+/* Gradient moving title */
+.hero-title span{
+    background:linear-gradient(45deg,silver,white,#bbb,silver);
+    background-size:300%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 5s linear infinite;
+}
+
+@keyframes shine{
+    0%{background-position:0%;}
+    100%{background-position:300%;}
+}
+
+/* Floating Icons */
+.floating-icons span{
+    position:absolute;
+    font-size:28px;
+    opacity:0.7;
+    animation:floatIcon 10s linear infinite;
+}
+
+.floating-icons span:nth-child(1){ top:20%; left:10%; animation-delay:0s;}
+.floating-icons span:nth-child(2){ top:70%; left:15%; animation-delay:2s;}
+.floating-icons span:nth-child(3){ top:40%; right:10%; animation-delay:4s;}
+.floating-icons span:nth-child(4){ top:15%; right:20%; animation-delay:6s;}
+.floating-icons span:nth-child(5){ bottom:20%; right:30%; animation-delay:8s;}
+
+@keyframes floatIcon{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-30px);}
+    100%{transform:translateY(0);}
+}
+
+/* Typing effect */
+.typing-text{
+    overflow:hidden;
+    white-space:nowrap;
+    border-right:3px solid white;
+    width:0;
+    margin:20px auto;
+    animation:typing 4s steps(50,end) forwards, blink 0.7s infinite;
+}
+
+@keyframes typing{
+    to{width:100%;}
+}
+
+@keyframes blink{
+    50%{border-color:transparent;}
+}
+
+/* Floating GIF */
+.hero-gif{
+    position:absolute;
+    bottom:30px;
+    left:30px;
+    width:120px;
+    opacity:0.8;
+    animation:floatGif 6s ease-in-out infinite;
+}
+
+@keyframes floatGif{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
+}
+
+/* Scroll Indicator */
+.scroll-indicator{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.mouse{
+    width:25px;
+    height:40px;
+    border:2px solid white;
+    border-radius:15px;
+    position:relative;
+}
+
+.mouse::before{
+    content:'';
+    position:absolute;
+    top:8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:5px;
+    height:8px;
+    background:white;
+    border-radius:5px;
+    animation:scrollDown 2s infinite;
+}
+
+@keyframes scrollDown{
+    0%{opacity:1; transform:translate(-50%,0);}
+    100%{opacity:0; transform:translate(-50%,15px);}
+}
+
+/* Responsive Fix */
+@media(max-width:768px){
+    .hero h1{font-size:36px;}
+    .typing-text{white-space:normal; width:100%; border:none;}
+    .hero-gif{width:80px;}
+}
+
+/* ===== PREMIUM PACKAGES SECTION ===== */
+
+.premium-packages{
+    padding:120px 8%;
+    background:linear-gradient(to bottom,#f9f9f9,#ffffff);
+    position:relative;
+    overflow:hidden;
+}
+
+.section-title{
+    text-align:center;
+    font-size:40px;
+    margin-bottom:60px;
+    background:linear-gradient(45deg,silver,#999);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* Floating Icons */
+.floating-plane,
+.floating-globe{
+    position:absolute;
+    font-size:40px;
+    opacity:0.2;
+    animation:floatIcon 8s ease-in-out infinite;
+}
+
+.floating-plane{ top:50px; left:40px;}
+.floating-globe{ bottom:50px; right:60px;}
+
+/* Grid */
+.packages-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+}
+
+/* 3D Card */
+.tour-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    transition:transform 0.4s;
+    transform-style:preserve-3d;
+    position:relative;
+}
+
+.tour-card:hover{
+    transform:rotateY(8deg) rotateX(8deg) translateY(-10px);
+    box-shadow:0 30px 60px rgba(0,0,0,0.15);
+}
+
+.tour-card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.tour-content{
+    padding:20px;
+}
+
+/* Price Badge */
+.price-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:silver;
+    padding:8px 15px;
+    border-radius:20px;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(192,192,192,0.8);
+    animation:pulse 2s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+    100%{transform:scale(1);}
+}
+
+/* Buttons */
+.tour-buttons{
+    display:flex;
+    gap:10px;
+    margin-top:15px;
+}
+
+.tour-buttons button{
+    flex:1;
+    padding:10px;
+    border:none;
+    border-radius:20px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.details-btn{
+    background:#eee;
+}
+
+.details-btn:hover{
+    background:#ddd;
+}
+
+.book-btn{
+    background:silver;
+    box-shadow:0 0 10px rgba(192,192,192,0.8);
+}
+
+.book-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 25px rgba(192,192,192,1);
+}
+
+/* Loader */
+.loader{
+    display:none;
+    margin-top:10px;
+    border:4px solid #f3f3f3;
+    border-top:4px solid silver;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .section-title{font-size:30px;}
+}
+
+/* ===== PREMIUM SERVICES SECTION ===== */
+
+.premium-services{
+    padding:120px 8%;
+    background:linear-gradient(to bottom,#ffffff,#f2f2f2);
+    position:relative;
+    overflow:hidden;
+}
+
+.services-title{
+    text-align:center;
+    font-size:42px;
+    background:linear-gradient(45deg,silver,#999,#ccc,silver);
+    background-size:300%;
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 6s linear infinite;
+}
+
+/* Typing Effect */
+.services-typing{
+    text-align:center;
+    margin:20px auto 60px;
+    max-width:700px;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:3px solid #999;
+    width:0;
+    animation:typing2 5s steps(60,end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing2{
+    to{width:100%;}
+}
+
+/* Floating Icons */
+.floating-service-icon,
+.floating-service-icon2{
+    position:absolute;
+    font-size:40px;
+    opacity:0.15;
+    animation:floatService 8s ease-in-out infinite;
+}
+
+.floating-service-icon{ top:80px; left:40px;}
+.floating-service-icon2{ bottom:60px; right:60px;}
+
+@keyframes floatService{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-30px);}
+    100%{transform:translateY(0);}
+}
+
+/* Grid */
+.services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:40px;
+}
+
+/* Card */
+.service-card{
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(15px);
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    transition:0.4s;
+    transform-style:preserve-3d;
+    position:relative;
+}
+
+.service-card:hover{
+    transform:rotateY(8deg) rotateX(8deg) translateY(-10px);
+    box-shadow:0 30px 70px rgba(0,0,0,0.15);
+}
+
+/* Badge */
+.service-badge{
+    position:absolute;
+    top:15px;
+    right:15px;
+    background:silver;
+    padding:6px 15px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    box-shadow:0 0 15px rgba(192,192,192,0.9);
+    animation:pulse 2s infinite;
+}
+
+/* Icon */
+.service-icon{
+    font-size:40px;
+    margin-bottom:15px;
+    animation:rotateIcon 6s linear infinite;
+}
+
+/* Button */
+.service-btn{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:silver;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(192,192,192,0.8);
+    transition:0.3s;
+}
+
+.service-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px rgba(192,192,192,1);
+}
+
+/* Loader */
+.service-loader{
+    display:none;
+    margin:15px auto 0;
+    border:4px solid #f3f3f3;
+    border-top:4px solid silver;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    animation:spin 1s linear infinite;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .services-title{font-size:30px;}
+    .services-typing{
+        white-space:normal;
+        border:none;
+        width:100%;
+    }
+}
+
+/* ===== ULTRA SERVICES SECTION ===== */
+
+.ultra-services{
+    padding:140px 8%;
+    background:linear-gradient(145deg,#ffffff,#f3f3f3);
+    position:relative;
+    overflow:hidden;
+}
+
+/* Light Orbs */
+.light-orb, .light-orb2{
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:radial-gradient(circle,silver,transparent);
+    border-radius:50%;
+    opacity:0.2;
+    animation:floatLight 10s infinite ease-in-out;
+}
+
+.light-orb{ top:100px; left:-50px;}
+.light-orb2{ bottom:100px; right:-50px;}
+
+@keyframes floatLight{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-40px);}
+    100%{transform:translateY(0);}
+}
+
+/* Moving Background Boxes */
+.moving-bg-box,
+.moving-bg-box2{
+    position:absolute;
+    width:150px;
+    height:150px;
+    background:rgba(192,192,192,0.1);
+    border-radius:20px;
+    animation:moveBox 12s infinite linear;
+}
+
+.moving-bg-box{ top:200px; left:10%;}
+.moving-bg-box2{ bottom:200px; right:10%;}
+
+@keyframes moveBox{
+    0%{transform:rotate(0deg) translateY(0);}
+    50%{transform:rotate(180deg) translateY(30px);}
+    100%{transform:rotate(360deg) translateY(0);}
+}
+
+/* Title */
+.ultra-title{
+    text-align:center;
+    font-size:45px;
+    background:linear-gradient(45deg,silver,#999,#ccc);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 6s linear infinite;
+}
+
+/* Typing */
+.ultra-typing{
+    text-align:center;
+    margin:20px auto 70px;
+    max-width:750px;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:3px solid silver;
+    width:0;
+    animation:typing3 5s steps(60,end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing3{
+    to{width:100%;}
+}
+
+/* Grid */
+.ultra-services-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:40px;
+}
+
+/* Card */
+.ultra-card{
+    background:rgba(255,255,255,0.8);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:25px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.08);
+    transition:0.4s;
+    transform-style:preserve-3d;
+    position:relative;
+}
+
+.ultra-card:hover{
+    transform:rotateY(10deg) rotateX(8deg) translateY(-15px);
+    box-shadow:0 35px 80px rgba(0,0,0,0.15);
+}
+
+/* 3D Floating Icon */
+.ultra-3d{
+    font-size:50px;
+    animation:float3d 4s ease-in-out infinite;
+}
+
+@keyframes float3d{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
+}
+
+/* Images */
+.service-img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:15px;
+    margin:15px 0;
+    transition:0.4s;
+}
+
+.service-img:hover{
+    transform:scale(1.05);
+}
+
+/* Button */
+.ultra-btn{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:silver;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(192,192,192,0.8);
+    transition:0.3s;
+}
+
+.ultra-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px rgba(192,192,192,1);
+}
+
+/* Loader */
+.ultra-loader{
+    display:none;
+    margin:15px auto 0;
+    border:4px solid #f3f3f3;
+    border-top:4px solid silver;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    animation:spin 1s linear infinite;
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .ultra-title{font-size:30px;}
+    .ultra-typing{
+        white-space:normal;
+        border:none;
+        width:100%;
+    }
+}
+
+/* ===== ULTRA ABOUT SECTION ===== */
+
+.ultra-about{
+    padding:140px 8%;
+    background:linear-gradient(160deg,#ffffff,#f5f5f5);
+    position:relative;
+    overflow:hidden;
+}
+
+/* Floating Lights */
+.about-light, .about-light2{
+    position:absolute;
+    width:250px;
+    height:250px;
+    background:radial-gradient(circle,silver,transparent);
+    border-radius:50%;
+    opacity:0.2;
+    animation:floatLight 12s infinite ease-in-out;
+}
+
+.about-light{ top:80px; left:-60px;}
+.about-light2{ bottom:80px; right:-60px;}
+
+/* Moving Background Boxes */
+.about-moving-box,
+.about-moving-box2{
+    position:absolute;
+    width:160px;
+    height:160px;
+    background:rgba(192,192,192,0.1);
+    border-radius:25px;
+    animation:moveBox 14s infinite linear;
+}
+
+.about-moving-box{ top:250px; left:10%;}
+.about-moving-box2{ bottom:250px; right:10%;}
+
+/* Title */
+.about-title{
+    text-align:center;
+    font-size:45px;
+    background:linear-gradient(45deg,silver,#aaa,#ddd);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    animation:shine 6s linear infinite;
+}
+
+/* Typing */
+.about-typing{
+    text-align:center;
+    margin:20px auto 70px;
+    max-width:750px;
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:3px solid silver;
+    width:0;
+    animation:typing4 5s steps(60,end) forwards, blink 0.8s infinite;
+}
+
+@keyframes typing4{
+    to{width:100%;}
+}
+
+/* Layout */
+.about-container{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:center;
+}
+
+/* Slide from Left */
+.slide-left-about{
+    opacity:0;
+    transform:translateX(-80px);
+    transition:1.2s ease;
+}
+
+.slide-left-about.active{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* Image */
+.about-img{
+    width:100%;
+    border-radius:25px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.1);
+    transition:0.5s;
+}
+
+.about-img:hover{
+    transform:scale(1.05);
+}
+
+/* Cards */
+.about-card{
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(15px);
+    border-radius:25px;
+    padding:25px;
+    margin-bottom:25px;
+    box-shadow:0 25px 60px rgba(0,0,0,0.08);
+    transition:0.4s;
+    transform-style:preserve-3d;
+}
+
+.about-card:hover{
+    transform:rotateY(8deg) rotateX(6deg) translateY(-10px);
+    box-shadow:0 35px 80px rgba(0,0,0,0.15);
+}
+
+/* 3D Floating Icon */
+.about-3d{
+    font-size:45px;
+    animation:float3d 4s ease-in-out infinite;
+}
+
+/* Button */
+.about-btn{
+    margin-top:15px;
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:25px;
+    background:silver;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 0 15px rgba(192,192,192,0.8);
+    transition:0.3s;
+}
+
+.about-btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 30px rgba(192,192,192,1);
+}
+
+/* Loader */
+.about-loader{
+    display:none;
+    margin:15px auto 0;
+    border:4px solid #f3f3f3;
+    border-top:4px solid silver;
+    border-radius:50%;
+    width:25px;
+    height:25px;
+    animation:spin 1s linear infinite;
+}
+
+/* Responsive */
+@media(max-width:900px){
+    .about-container{
+        grid-template-columns:1fr;
+    }
+    .about-title{font-size:30px;}
+    .about-typing{
+        white-space:normal;
+        border:none;
+        width:100%;
+    }
+}
+
+/* SECTION */
+.videos-gallery-section {
+    padding: 100px 5%;
+    background: #0f0f1a;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* HEADER */
+.vg-header {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: slideLeft 1s ease forwards;
+}
+
+.vg-title {
+    font-size: 40px;
+    background: linear-gradient(45deg, silver, white);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* FLOATING ICONS */
+.floating-icon {
+    position: absolute;
+    font-size: 30px;
+    animation: float 6s infinite ease-in-out;
+}
+
+.icon1 { top: 10%; left: 5%; }
+.icon2 { top: 40%; right: 8%; }
+.icon3 { bottom: 10%; left: 50%; }
+
+/* GRID */
+.vg-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+/* CARD */
+.vg-card {
+    background: #1a1a2e;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    transition: 0.5s;
+    transform-style: preserve-3d;
+}
+
+.vg-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+}
+
+.vg-card:hover {
+    transform: rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+/* GLOW BUTTON */
+.glow-btn {
+    padding: 10px 20px;
+    border: none;
+    background: silver;
+    color: black;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 20px silver;
+}
+
+/* LOADER */
+.loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    border: 4px solid silver;
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+/* 3D CUBE */
+.cube-section {
+    margin-top: 120px;
+    text-align: center;
+}
+
+.cube-container {
+    width: 200px;
+    height: 200px;
+    margin: 50px auto;
+    perspective: 800px;
+}
+
+.cube {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    animation: rotateCube 10s infinite linear;
+}
+
+.face {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: linear-gradient(45deg, silver, #444);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 2px solid white;
+}
+
+.front  { transform: rotateY(0deg) translateZ(100px); }
+.back   { transform: rotateY(180deg) translateZ(100px); }
+.right  { transform: rotateY(90deg) translateZ(100px); }
+.left   { transform: rotateY(-90deg) translateZ(100px); }
+.top    { transform: rotateX(90deg) translateZ(100px); }
+.bottom { transform: rotateX(-90deg) translateZ(100px); }
+
+/* ANIMATIONS */
+@keyframes rotateCube {
+    from { transform: rotateX(0) rotateY(0); }
+    to { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+@keyframes spin {
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes float {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+@keyframes slideLeft {
+    from { opacity:0; transform:translateX(-100px); }
+    to { opacity:1; transform:translateX(0); }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .vg-title { font-size:28px; }
+    .cube-container { width:150px; height:150px; }
+    .face { width:150px; height:150px; }
+}
+
+.ultra-vg-section{
+    padding:120px 5%;
+    background:#0d0d1f;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+/* HEADER */
+.ultra-header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.ultra-title{
+    font-size:42px;
+    background:linear-gradient(45deg,rgb(51, 35, 35),white);
+    background-clip:text;
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+}
+
+/* FLOATING ICONS */
+.float-icon{
+    position:absolute;
+    font-size:28px;
+    animation:float 6s infinite ease-in-out;
+}
+
+.fi1{top:10%;left:5%;}
+.fi2{top:40%;right:6%;}
+.fi3{bottom:15%;left:50%;}
+.fi4{top:20%;right:40%;}
+
+/* MOVING STRIP */
+.moving-strip{
+    overflow:hidden;
+    margin-bottom:60px;
+}
+
+.strip-track{
+    display:flex;
+    gap:20px;
+    animation:scroll 20s linear infinite;
+}
+
+.strip-track img{
+    width:250px;
+    height:150px;
+    border-radius:15px;
+    object-fit:cover;
+}
+
+/* GRID */
+.ultra-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+.ultra-card{
+    background:#1b1b30;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+    transition:0.5s;
+    transform-style:preserve-3d;
+    color: #676a6a;
+}
+
+.ultra-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.ultra-card:hover{
+    transform:rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+.card-content{
+    padding:20px;
+}
+
+/* LIGHT SWEEP */
+.ultra-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:rgba(255,255,255,0.1);
+    transform:skewX(-25deg);
+    transition:0.8s;
+}
+
+.ultra-card:hover::before{
+    left:150%;
+}
+
+/* LOADER */
+.loader{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:40px;
+    height:40px;
+    border:4px solid silver;
+    border-top:4px solid transparent;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    transform:translate(-50%,-50%);
+}
+
+/* GLOW BUTTON */
+.glow-btn{
+    padding:10px 20px;
+    border:none;
+    border-radius:30px;
+    background:silver;
+    color:black;
+    cursor:pointer;
+    transition:0.4s;
+}
+
+.glow-btn:hover{
+    box-shadow:0 0 20px silver;
+}
+
+/* CUBE */
+.cube-container{
+    width:200px;
+    height:200px;
+    margin:60px auto;
+    perspective:800px;
+}
+
+.cube{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:rotateCube 10s infinite linear;
+}
+
+.face{
+    position:absolute;
+    width:200px;
+    height:200px;
+    background:linear-gradient(45deg,silver,#444);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid white;
+}
+
+.front{transform:rotateY(0deg) translateZ(100px);}
+.back{transform:rotateY(180deg) translateZ(100px);}
+.right{transform:rotateY(90deg) translateZ(100px);}
+.left{transform:rotateY(-90deg) translateZ(100px);}
+.top{transform:rotateX(90deg) translateZ(100px);}
+.bottom{transform:rotateX(-90deg) translateZ(100px);}
+
+/* ANIMATIONS */
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+
+@keyframes scroll{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+}
+
+@keyframes spin{
+    100%{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+@keyframes rotateCube{
+    from{transform:rotateX(0) rotateY(0);}
+    to{transform:rotateX(360deg) rotateY(360deg);}
+}
+
+/* REVEAL LEFT */
+.reveal-left{
+    opacity:0;
+    transform:translateX(-100px);
+    transition:1s;
+}
+
+.reveal-left.active{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .ultra-title{font-size:28px;}
+    .cube-container{width:150px;height:150px;}
+    .face{width:150px;height:150px;}
+}
+
+.ultra-footer{
+    background:#080818;
+    color:white;
+    padding:60px 5%;
+}
+
+.footer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:40px;
+}
+
+.footer-grid a{
+    display:block;
+    color:silver;
+    margin:5px 0;
+    transition:0.3s;
+}
+
+.footer-grid a:hover{
+    color:white;
+    transform:translateX(5px);
+}
+
+.footer-bottom{
+    text-align:center;
+    margin-top:40px;
+    border-top:1px solid #333;
+    padding-top:20px;
+}
+
+.ultra-reviews-section{
+    padding:120px 5%;
+    background:#0c0c1d;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+/* HEADER */
+.reviews-header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+/* FLOATING ICONS */
+.review-icon{
+    position:absolute;
+    font-size:28px;
+    animation:float 6s infinite ease-in-out;
+}
+.ri1{top:10%;left:5%;}
+.ri2{top:30%;right:8%;}
+.ri3{bottom:20%;left:50%;}
+.ri4{top:60%;right:40%;}
+
+/* STATS */
+.review-stats{
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:60px;
+    flex-wrap:wrap;
+}
+.review-stats div{
+    text-align:center;
+    margin:20px;
+}
+.review-stats h3{
+    font-size:40px;
+    color:silver;
+}
+
+/* GRID */
+.reviews-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+.review-card{
+    background:#1a1a2e;
+    border-radius:20px;
+    overflow:hidden;
+    position:relative;
+    transition:0.5s;
+    transform-style:preserve-3d;
+}
+
+.review-card img{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    margin:20px auto;
+    display:block;
+}
+
+.review-card:hover{
+    transform:rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+/* LIGHT SWEEP */
+.review-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:rgba(255,255,255,0.1);
+    transform:skewX(-25deg);
+    transition:0.8s;
+}
+.review-card:hover::before{
+    left:150%;
+}
+
+.review-content{
+    padding:20px;
+    text-align:center;
+}
+
+/* LOADER */
+.loader{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:40px;
+    height:40px;
+    border:4px solid silver;
+    border-top:4px solid transparent;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    transform:translate(-50%,-50%);
+}
+
+/* BUTTON */
+.glow-btn{
+    padding:10px 20px;
+    border:none;
+    border-radius:30px;
+    background:silver;
+    color:black;
+    cursor:pointer;
+    transition:0.4s;
+}
+.glow-btn:hover{
+    box-shadow:0 0 20px silver;
+}
+
+/* CUBE */
+.cube-container{
+    width:200px;
+    height:200px;
+    margin:60px auto;
+    perspective:800px;
+}
+.cube{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:rotateCube 10s infinite linear;
+}
+.face{
+    position:absolute;
+    width:200px;
+    height:200px;
+    background:linear-gradient(45deg,silver,#444);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid white;
+}
+.front{transform:rotateY(0deg) translateZ(100px);}
+.back{transform:rotateY(180deg) translateZ(100px);}
+.right{transform:rotateY(90deg) translateZ(100px);}
+.left{transform:rotateY(-90deg) translateZ(100px);}
+.top{transform:rotateX(90deg) translateZ(100px);}
+.bottom{transform:rotateX(-90deg) translateZ(100px);}
+
+/* REVEAL */
+.reveal-left{
+    opacity:0;
+    transform:translateX(-100px);
+    transition:1s;
+}
+.reveal-left.active{
+    opacity:1;
+    transform:translateX(0);
+}
+
+/* ANIMATIONS */
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+@keyframes spin{
+    100%{transform:translate(-50%,-50%) rotate(360deg);}
+}
+@keyframes rotateCube{
+    from{transform:rotateX(0) rotateY(0);}
+    to{transform:rotateX(360deg) rotateY(360deg);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .review-stats{
+        flex-direction:column;
+        align-items:center;
+    }
+    .cube-container{
+        width:150px;
+        height:150px;
+    }
+    .face{
+        width:150px;
+        height:150px;
+    }
+}
+
+/* ================= CARDS ================= */
+
+.card-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.08);
+    transition:0.5s;
+    transform-style:preserve-3d;
+}
+
+.card:hover{
+    transform:rotateY(10deg) rotateX(10deg) translateY(-10px);
+    box-shadow:0 25px 50px rgba(0,0,0,0.2);
+}
+
+/* ================= GIF SECTION ================= */
+
+.gif-section{
+    text-align:center;
+}
+
+.gif-section img{
+    width:200px;
+    animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-15px);}
+    100%{transform:translateY(0);}
+}
+
+/* ================= GALLERY ================= */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+
+.gallery img{
+    width:100%;
+    border-radius:15px;
+    transition:0.5s;
+}
+
+.gallery img:hover{
+    transform:scale(1.1);
+}
+
+/* ================= FOOTER ================= */
+
+footer{
+    background:#111;
+    color:white;
+    text-align:center;
+    padding:40px 20px;
+}
+
+.ultra-footer {
+    background: #111827;
+    color: white;
+    padding: 60px 10%;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+.footer-grid h3,
+.footer-grid h4 {
+    margin-bottom: 15px;
+}
+
+.footer-grid a {
+    display: block;
+    color: #d1d5db;
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-grid a:hover {
+    color: #00ffff;
+    transform: translateX(5px);
+}
+
+/* Social Icons */
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    
+    gap: 40px;
+}
+
+.social {
+    font-size: 20px;
+    margin-right: 15px;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.social:hover {
+    transform: scale(1.2);
+}
+
+.instagram:hover { color: #E1306C; }
+.whatsapp:hover { color: #25D366; }
+.facebook:hover { color: #1877F2; }
+.twitter:hover { color: #1DA1F2; }
+
+/* Newsletter */
+.ultra-footer input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.glow-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    background: #00ffff;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 15px #00ffff;
+}
+
+#subscribeMessage {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    opacity: 0.7;
+}
+
+/* Mobile Friendly */
+@media (max-width: 768px) {
+    .ultra-footer {
+        padding: 40px 5%;
+    }
+}
+
+/* ================= SCROLL ANIMATION ================= */
+
+.fade-up{
+    opacity:0;
+    transform:translateY(40px);
+    transition:1s;
+}
+
+.fade-up.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Logo Styling */
+.logo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-weight:700;
+    font-size:24px;
+    color:#333;
+}
+
+/* Logo Image */
+.logo img{
+    width:40px;
+    height:40px;
+    object-fit:contain;
+}
+
+/* Logo Text */
+.logo span{
+    letter-spacing:1px;
+}
+
+/* Mobile Responsive */
+@media(max-width:768px){
+
+    .logo{
+        font-size:20px;
+        gap:8px;
+    }
+
+    .logo img{
+        width:32px;
+        height:32px;
+    }
+
+}
+.logo:hover img{
+    transform:rotate(8deg) scale(1.05);
+    transition:0.3s;
+}
+/* ================= LOGO ================= */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#222;
+    cursor:pointer;
+    position:relative;
+}
+
+/* Bigger Logo Image */
+
+.logo img{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    transition:0.5s ease;
+}
+
+/* Text styling */
+
+.logo span{
+    position:relative;
+    background:linear-gradient(90deg,#555,#999,#555);
+    background-size:200%;
+    background:linear-gradient(45deg,silver,#999);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    -webkit-text-fill-color:transparent;
+    animation:logoShine 5s linear infinite;
+}
+
+/* Shine animation */
+
+@keyframes logoShine{
+    0%{background-position:0%}
+    100%{background-position:200%}
+}
+
+/* Hover animation like premium travel sites */
+
+.logo:hover img{
+    transform:scale(1.1) rotate(-5deg);
+}
+
+.logo:hover span{
+    letter-spacing:2px;
+}
+
+/* Soft glow */
+
+.logo::after{
+    content:"";
+    position:absolute;
+    inset:-5px;
+    border-radius:10px;
+    opacity:0;
+    background:radial-gradient(circle, rgba(192,192,192,0.4), transparent);
+    transition:0.4s;
+}
+
+.logo:hover::after{
+    opacity:1;
+}
+@media(max-width:768px){
+
+.logo{
+    font-size:22px;
+    gap:8px;
+}
+
+.logo img{
+    width:42px;
+    height:42px;
+}
+
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+<h2 class="logo">
+    <img src="lega.png" alt="LegacyTours Logo">
+    <span>LegacyTours</span>
+</h2>
+
+<div class="hamburger" id="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</div>
+
+<ul id="navLinks">
+<li><a href="index.html">Home</a></li>
+<li><a href="packages.html">Tour Packages</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="videos.html">Videos</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li><a href="reviews.html">Reviews</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+
+<!-- Floating Background Icons -->
+<div class="floating-icons">
+    <span>✈</span>
+    <span>🌍</span>
+    <span>🧳</span>
+    <span>🏝</span>
+    <span>🏔</span>
+</div>
+
+
+
+<div class="hero-content">
+    <h1 class="hero-title">Explore The World In <span>Silver Style</span></h1>
+
+    <p class="typing-text">
+        Luxury travel experiences crafted for unforgettable memories
+    </p>
+
+    <button class="glow-btn">Book Now</button>
+</div>
+
+<!-- Scroll Indicator -->
+<div class="scroll-indicator">
+    <div class="mouse"></div>
+</div>
+
+</section>
+
+<section class="premium-packages">
+
+<h2 class="section-title">Our Premium Tour Packages</h2>
+
+<div class="floating-plane">✈</div>
+<div class="floating-globe">🌍</div>
+
+<div class="packages-grid">
+
+<!-- CARD 1 -->
+<div class="tour-card">
+    <div class="price-badge">₹1,25,000</div>
+    <img src="paris.jpg" alt="">
+    <div class="tour-content">
+        <h3>Paris Luxury Escape</h3>
+        <p>5 Nights • 4 Star Hotel • Private Guide • Seine River Cruise</p>
+        <div class="tour-buttons">
+            <button class="details-btn">View Details</button>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="loader"></div>
+    </div>
+</div>
+
+<!-- CARD 2 -->
+<div class="tour-card">
+    <div class="price-badge">₹2,10,000</div>
+    <img src="ml.jpg" alt="">
+    <div class="tour-content">
+        <h3>Maldives Royal Retreat</h3>
+        <p>Water Villa • All Meals • Snorkeling • Sunset Cruise</p>
+        <div class="tour-buttons">
+            <button class="details-btn">View Details</button>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="loader"></div>
+    </div>
+</div>
+
+<!-- CARD 3 -->
+<div class="tour-card">
+    <div class="price-badge">₹1,75,000</div>
+    <img src="swiss.jpg" alt="">
+    <div class="tour-content">
+        <h3>Swiss Alps Adventure</h3>
+        <p>Snow Activities • Mountain Rail • 5 Star Stay</p>
+        <div class="tour-buttons">
+            <button class="details-btn">View Details</button>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="loader"></div>
+    </div>
+</div>
+
+<!-- CARD 4 -->
+<div class="tour-card">
+    <div class="price-badge">₹95,000</div>
+    <img src="dubai.jpg" alt="">
+    <div class="tour-content">
+        <h3>Dubai Skyline Tour</h3>
+        <p>Desert Safari • Burj Khalifa • Luxury Hotel</p>
+        <div class="tour-buttons">
+            <button class="details-btn">View Details</button>
+            <button class="book-btn">Book Now</button>
+        </div>
+        <div class="loader"></div>
+    </div>
+</div>
+
+</div>
+</section>
+
+<section class="gif-section">
+<h2 class="fade-up">Travel With Joy ✨</h2>
+<img src="https://media.giphy.com/media/3o6ZtaO9BZHcOjmErm/giphy.gif">
+</section>
+
+<section class="premium-services">
+
+<h2 class="services-title">Our Luxury Travel Services</h2>
+
+<p class="services-typing">
+We don’t just plan trips — we craft unforgettable journeys across the world.
+</p>
+
+<div class="floating-service-icon">🛫</div>
+<div class="floating-service-icon2">🌎</div>
+
+<div class="services-grid">
+
+<!-- SERVICE 1 -->
+<div class="service-card">
+    <div class="service-badge">Most Popular</div>
+    <div class="service-icon">✈</div>
+    <h3>Flight Booking</h3>
+    <p>International & Domestic flights with premium seat selection and flexible cancellation.</p>
+    <ul>
+        <li>✔ Business Class Upgrades</li>
+        <li>✔ Airport Lounge Access</li>
+        <li>✔ Priority Boarding</li>
+    </ul>
+    <button class="service-btn">Get Service</button>
+    <div class="service-loader"></div>
+</div>
+
+<!-- SERVICE 2 -->
+<div class="service-card">
+    <div class="service-badge">Luxury</div>
+    <div class="service-icon">🏨</div>
+    <h3>Hotel Reservations</h3>
+    <p>5-Star resorts, water villas, mountain retreats & private suites.</p>
+    <ul>
+        <li>✔ Sea View Rooms</li>
+        <li>✔ Free Breakfast</li>
+        <li>✔ Spa & Wellness Access</li>
+    </ul>
+    <button class="service-btn">Get Service</button>
+    <div class="service-loader"></div>
+</div>
+
+<!-- SERVICE 3 -->
+<div class="service-card">
+    <div class="service-badge">Premium</div>
+    <div class="service-icon">🚗</div>
+    <h3>Private Transport</h3>
+    <p>Luxury airport pickup, chauffeur service & private vehicles.</p>
+    <ul>
+        <li>✔ Chauffeur Driven</li>
+        <li>✔ Luxury Cars</li>
+        <li>✔ 24/7 Availability</li>
+    </ul>
+    <button class="service-btn">Get Service</button>
+    <div class="service-loader"></div>
+</div>
+
+<!-- SERVICE 4 -->
+<div class="service-card">
+    <div class="service-badge">Exclusive</div>
+    <div class="service-icon">🗺</div>
+    <h3>Guided Tours</h3>
+    <p>Expert local guides for historical, adventure & cultural tours.</p>
+    <ul>
+        <li>✔ Multilingual Guides</li>
+        <li>✔ VIP Entry Access</li>
+        <li>✔ Custom Itineraries</li>
+    </ul>
+    <button class="service-btn">Get Service</button>
+    <div class="service-loader"></div>
+</div>
+
+</div>
+
+</section>
+
+<section class="ultra-services">
+
+<div class="light-orb"></div>
+<div class="light-orb2"></div>
+
+<h2 class="ultra-title">Elite Travel Services</h2>
+
+<p class="ultra-typing">
+We engineer premium travel experiences with luxury precision and global excellence.
+</p>
+
+<div class="moving-bg-box"></div>
+<div class="moving-bg-box2"></div>
+
+<div class="ultra-services-grid">
+
+<!-- SERVICE CARD 1 -->
+<div class="ultra-card">
+    <div class="ultra-3d">🌍</div>
+    <img src="flight.jfif" class="service-img">
+    <h3>Global Flight Management</h3>
+    <p>Priority booking, international upgrades & elite travel concierge.</p>
+    <ul>
+        <li>✔ Business & First Class</li>
+        <li>✔ Flexible Rescheduling</li>
+        <li>✔ VIP Airport Assistance</li>
+    </ul>
+    <button class="ultra-btn">Activate Service</button>
+    <div class="ultra-loader"></div>
+</div>
+
+<!-- SERVICE CARD 2 -->
+<div class="ultra-card">
+    <div class="ultra-3d">🏨</div>
+    <img src="hotel.png" class="service-img">
+    <h3>Luxury Resort Booking</h3>
+    <p>Exclusive partnerships with 5-star resorts worldwide.</p>
+    <ul>
+        <li>✔ Ocean View Suites</li>
+        <li>✔ Private Pools</li>
+        <li>✔ Spa & Wellness</li>
+    </ul>
+    <button class="ultra-btn">Activate Service</button>
+    <div class="ultra-loader"></div>
+</div>
+
+<!-- SERVICE CARD 3 -->
+<div class="ultra-card">
+    <div class="ultra-3d">🚘</div>
+    <img src="cha.jpg" class="service-img">
+    <h3>Private Chauffeur</h3>
+    <p>Luxury transportation with professional drivers.</p>
+    <ul>
+        <li>✔ Premium Vehicles</li>
+        <li>✔ 24/7 Availability</li>
+        <li>✔ Airport Pickup</li>
+    </ul>
+    <button class="ultra-btn">Activate Service</button>
+    <div class="ultra-loader"></div>
+</div>
+
+<!-- SERVICE CARD 4 -->
+<div class="ultra-card">
+    <div class="ultra-3d">🗺</div>
+    <img src="guide.jfif" class="service-img">
+    <h3>Private Guided Tours</h3>
+    <p>Professional multilingual guides with VIP access.</p>
+    <ul>
+        <li>✔ Historical & Cultural Tours</li>
+        <li>✔ Skip-the-Line Access</li>
+        <li>✔ Custom Itinerary</li>
+    </ul>
+    <button class="ultra-btn">Activate Service</button>
+    <div class="ultra-loader"></div>
+</div>
+
+</div>
+</section>
+
+<section class="ultra-about">
+
+<div class="about-light"></div>
+<div class="about-light2"></div>
+
+<h2 class="about-title">About Legacy Tours</h2>
+
+<p class="about-typing">
+Crafting unforgettable journeys with precision, passion, and luxury excellence.
+</p>
+
+<div class="about-moving-box"></div>
+<div class="about-moving-box2"></div>
+
+<div class="about-container">
+
+<!-- LEFT CONTENT -->
+<div class="about-left slide-left-about">
+    <img src="top.jpg" class="about-img">
+</div>
+
+<!-- RIGHT CONTENT -->
+<div class="about-right slide-left-about">
+
+    <div class="about-card">
+        <div class="about-3d">🌍</div>
+        <h3>Our Global Presence</h3>
+        <p>Operating in 50+ countries with luxury partnerships worldwide.</p>
+        <button class="about-btn">Learn More</button>
+        <div class="about-loader"></div>
+    </div>
+
+    <div class="about-card">
+        <div class="about-3d">💎</div>
+        <h3>Luxury Experience</h3>
+        <p>Premium curated travel with VIP treatment and exclusive access.</p>
+        <button class="about-btn">Explore</button>
+        <div class="about-loader"></div>
+    </div>
+
+    <div class="about-card">
+        <div class="about-3d">🚀</div>
+        <h3>Our Mission</h3>
+        <p>To redefine travel through innovation, personalization & elegance.</p>
+        <button class="about-btn">Discover</button>
+        <div class="about-loader"></div>
+    </div>
+
+</div>
+
+</div>
+</section>
+
+<!-- VIDEOS & GALLERY SECTION -->
+<section class="videos-gallery-section">
+
+    <div class="vg-header">
+        <h2 class="vg-title">
+            <span class="typing-text"></span>
+        </h2>
+        <p>Explore cinematic memories from our luxury travel experiences</p>
+    </div>
+
+    <!-- Floating Stickers -->
+    <div class="floating-icon icon1">🎥</div>
+    <div class="floating-icon icon2">📸</div>
+    <div class="floating-icon icon3">🌍</div>
+
+    <!-- Video Cards -->
+    <div class="vg-grid">
+
+        <div class="vg-card tilt-card">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e" />
+            <div class="vg-content">
+                <h3>Maldives Luxury</h3>
+                <button class="glow-btn">Watch Now</button>
+            </div>
+        </div>
+
+        <div class="vg-card tilt-card">
+            <div class="loader"></div>
+            <img src="dubai.jpg" />
+            <div class="vg-content">
+                <h3>Dubai Skyline</h3>
+                <button class="glow-btn">Watch Now</button>
+            </div>
+        </div>
+
+        <div class="vg-card tilt-card">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401" />
+            <div class="vg-content">
+                <h3>Paris Romance</h3>
+                <button class="glow-btn">Watch Now</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3D Rotating Cube Team Showcase -->
+    <div class="cube-section">
+        <h2>Meet Our Travel Experts</h2>
+
+        <div class="cube-container">
+            <div class="cube">
+                <div class="face front">CEO</div>
+                <div class="face back">Manager</div>
+                <div class="face right">Designer</div>
+                <div class="face left">Editor</div>
+                <div class="face top">Guide</div>
+                <div class="face bottom">Support</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="ultra-vg-section">
+
+    <!-- HEADER -->
+    <div class="ultra-header reveal-left">
+        <h2 class="ultra-title"><span class="typing-ultra"></span></h2>
+        <p>Luxury Cinematic Journeys & Premium Travel Captures</p>
+    </div>
+
+    <!-- Floating Moving Icons -->
+    <div class="float-icon fi1">🎬</div>
+    <div class="float-icon fi2">📷</div>
+    <div class="float-icon fi3">🌍</div>
+    <div class="float-icon fi4">✈</div>
+
+    <!-- Moving Image Strip -->
+    <div class="moving-strip">
+        <div class="strip-track">
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+            <img src="swiss.jpg">
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+            <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e">
+        </div>
+    </div>
+
+    <!-- VIDEO CARDS -->
+    <div class="ultra-grid">
+
+        <div class="ultra-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+            <div class="card-content">
+                <h3>Maldives Escape</h3>
+                <p>7 Days | Overwater Villa | Private Yacht</p>
+                <button class="glow-btn">Watch Now</button>
+            </div>
+        </div>
+
+        <div class="ultra-card reveal-left">
+            <div class="loader"></div>
+            <img src="dubai.jpg">
+            <div class="card-content">
+                <h3>Dubai Royal Tour</h3>
+                <p>5 Days | Desert Safari | Burj Khalifa</p>
+                <button class="glow-btn">Explore</button>
+            </div>
+        </div>
+
+        <div class="ultra-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401">
+            <div class="card-content">
+                <h3>Paris Romance</h3>
+                <p>6 Days | Eiffel Dinner | Luxury Stay</p>
+                <button class="glow-btn">View Gallery</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3D CUBE TEAM -->
+    <div class="cube-showcase">
+        <h2>Our Elite Team</h2>
+
+        <div class="cube-container">
+            <div class="cube">
+                <div class="face front">CEO</div>
+                <div class="face back">Marketing</div>
+                <div class="face right">Editor</div>
+                <div class="face left">Guide</div>
+                <div class="face top">Designer</div>
+                <div class="face bottom">Support</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<section class="ultra-reviews-section">
+
+    <!-- HEADER -->
+    <div class="reviews-header reveal-left">
+        <h2><span class="typing-reviews"></span></h2>
+        <p>What Our Luxury Travelers Say About Us</p>
+    </div>
+
+    <!-- FLOATING ICONS -->
+    <div class="review-icon ri1">⭐</div>
+    <div class="review-icon ri2">💬</div>
+    <div class="review-icon ri3">🌍</div>
+    <div class="review-icon ri4">✈</div>
+
+    <!-- STATS -->
+    <div class="review-stats">
+        <div>
+            <h3 class="counter" data-target="5000">0</h3>
+            <p>Happy Travelers</p>
+        </div>
+        <div>
+            <h3 class="counter" data-target="120">0</h3>
+            <p>Destinations</p>
+        </div>
+        <div>
+            <h3 class="counter" data-target="98">0</h3>
+            <p>% Satisfaction</p>
+        </div>
+    </div>
+
+    <!-- REVIEW CARDS -->
+    <div class="reviews-grid">
+
+        <div class="review-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://randomuser.me/api/portraits/women/44.jpg">
+            <div class="review-content">
+                <h3>Priya Sharma</h3>
+                <p>Maldives Tour</p>
+                <p>"Absolutely magical experience! Luxury beyond expectations."</p>
+                <button class="glow-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="review-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://randomuser.me/api/portraits/men/32.jpg">
+            <div class="review-content">
+                <h3>Arjun Mehta</h3>
+                <p>Dubai Royal Trip</p>
+                <p>"Premium service & perfect itinerary. Highly recommended."</p>
+                <button class="glow-btn">Read More</button>
+            </div>
+        </div>
+
+        <div class="review-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://randomuser.me/api/portraits/women/65.jpg">
+            <div class="review-content">
+                <h3>Emily Johnson</h3>
+                <p>Paris Escape</p>
+                <p>"Romantic, classy and extremely well managed."</p>
+                <button class="glow-btn">Read More</button>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- 3D CUBE TEAM SHOWCASE -->
+    <div class="cube-showcase">
+        <h2>Our Review Management Team</h2>
+
+        <div class="cube-container">
+            <div class="cube">
+                <div class="face front">CEO</div>
+                <div class="face back">Support</div>
+                <div class="face right">Manager</div>
+                <div class="face left">Advisor</div>
+                <div class="face top">Marketing</div>
+                <div class="face bottom">Editor</div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<footer class="ultra-footer">
+
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div>
+            <h3>Silver Travels</h3>
+            <p>Luxury Experiences Crafted With Passion.</p>
+
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="#" class="social instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/919999999999" class="social whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="social facebook" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social twitter" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="packages.html">Packages</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <!-- Contact -->
+        <div>
+            <h4>Contact</h4>
+            <p>Email: info@silvertravels.com</p>
+            <p>Phone: +91 99999 99999</p>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+            <h4>Newsletter</h4>
+            <input type="email" id="newsletterEmail" placeholder="Enter Email">
+            <button class="glow-btn" onclick="subscribe()">Subscribe</button>
+            <p id="subscribeMessage"></p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Silver Travels | All Rights Reserved
+    </div>
+
+</footer>
+
+<!-- Font Awesome CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+
+</footer>
+
+<script>
+
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("active");
+}
+});
+},{threshold:0.2});
+
+document.querySelectorAll(".fade-up").forEach(el=>observer.observe(el));
+
+const hamburger=document.getElementById("hamburger");
+const navLinks=document.getElementById("navLinks");
+
+hamburger.addEventListener("click",()=>{
+hamburger.classList.toggle("active");
+navLinks.classList.toggle("show");
+});
+
+document.querySelectorAll("#navLinks a").forEach(link=>{
+link.addEventListener("click",()=>{
+hamburger.classList.remove("active");
+navLinks.classList.remove("show");
+});
+});
+
+// Slide from Left Observer
+const aboutObserver = new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+        if(entry.isIntersecting){
+            entry.target.classList.add("active");
+        }
+    });
+},{threshold:0.3});
+
+document.querySelectorAll(".slide-left-about")
+.forEach(el=>aboutObserver.observe(el));
+
+document.querySelectorAll(".ultra-btn").forEach(btn=>{
+    btn.addEventListener("click",function(){
+        const loader = this.nextElementSibling;
+        loader.style.display="block";
+        setTimeout(()=>{
+            loader.style.display="none";
+            alert("Elite Service Activated! Our team will contact you shortly.");
+        },2000);
+    });
+});
+
+// Button Loader
+document.querySelectorAll(".about-btn").forEach(btn=>{
+    btn.addEventListener("click",function(){
+        const loader = this.nextElementSibling;
+        loader.style.display="block";
+        setTimeout(()=>{
+            loader.style.display="none";
+            alert("More details coming soon!");
+        },2000);
+    });
+});
+
+// Typing Effect
+const text = "Our Videos & Gallery";
+let i = 0;
+function typeEffect(){
+    if(i < text.length){
+        document.querySelector(".typing-text").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 100);
+    }
+}
+typeEffect();
+
+// Remove loader after image loads
+document.querySelectorAll(".vg-card img").forEach(img=>{
+    img.onload = function(){
+        this.previousElementSibling.style.display = "none";
+    }
+});
+
+// Typing Animation
+const textUltra = "Videos & Luxury Gallery";
+let j = 0;
+function typeUltra(){
+    if(j < textUltra.length){
+        document.querySelector(".typing-ultra").innerHTML += textUltra.charAt(j);
+        j++;
+        setTimeout(typeUltra,100);
+    }
+}
+typeUltra();
+
+// Remove loader
+document.querySelectorAll(".ultra-card img").forEach(img=>{
+    img.onload=function(){
+        this.previousElementSibling.style.display="none";
+    }
+});
+
+// Scroll Reveal
+window.addEventListener("scroll",()=>{
+    document.querySelectorAll(".reveal-left").forEach(el=>{
+        const pos=el.getBoundingClientRect().top;
+        if(pos<window.innerHeight-100){
+            el.classList.add("active");
+        }
+    });
+});
+
+// Typing Effect
+const reviewText = "Luxury Client Reviews";
+let k = 0;
+function typeReviews(){
+    if(k < reviewText.length){
+        document.querySelector(".typing-reviews").innerHTML += reviewText.charAt(k);
+        k++;
+        setTimeout(typeReviews,100);
+    }
+}
+typeReviews();
+
+// Loader Remove
+document.querySelectorAll(".review-card img").forEach(img=>{
+    img.onload=function(){
+        this.previousElementSibling.style.display="none";
+    }
+});
+
+// Scroll Reveal
+window.addEventListener("scroll",()=>{
+    document.querySelectorAll(".reveal-left").forEach(el=>{
+        const pos=el.getBoundingClientRect().top;
+        if(pos < window.innerHeight - 100){
+            el.classList.add("active");
+        }
+    });
+});
+
+// Counter Animation
+const counters=document.querySelectorAll(".counter");
+counters.forEach(counter=>{
+    const update=()=>{
+        const target=+counter.getAttribute("data-target");
+        const count=+counter.innerText;
+        const inc=target/100;
+        if(count<target){
+            counter.innerText=Math.ceil(count+inc);
+            setTimeout(update,20);
+        }else{
+            counter.innerText=target;
+        }
+    };
+    update();
+});
+
+function subscribe() {
+    let email = document.getElementById("newsletterEmail").value;
+    let message = document.getElementById("subscribeMessage");
+
+    if (email === "") {
+        message.style.color = "red";
+        message.innerHTML = "Please enter your email!";
+    } else {
+        message.style.color = "lightgreen";
+        message.innerHTML = "Subscribing...";
+
+        setTimeout(() => {
+            message.innerHTML = "Successfully Subscribed!";
+        }, 1200);
+    }
+}
+
+</script>
+
+</body>
+</html>

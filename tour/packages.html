@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tour Packages - Silver Tours</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+    /* ================= NAVBAR BASE ================= */
+
+nav{
+    position:fixed;
+    top:0;
+    width:100%;
+    padding:18px 8%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.05);
+    z-index:1000;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+nav ul li a{
+    text-decoration:none;
+    color:#333;
+    font-weight:500;
+}
+
+/* ================= HAMBURGER ================= */
+
+.hamburger{
+    display:none;
+    flex-direction:column;
+    gap:6px;
+    cursor:pointer;
+}
+
+.hamburger span{
+    width:26px;
+    height:3px;
+    background:#333;
+    transition:0.3s ease;
+}
+
+/* Animate to X */
+.hamburger.active span:nth-child(1){
+    transform:rotate(45deg) translate(5px,5px);
+}
+.hamburger.active span:nth-child(2){
+    opacity:0;
+}
+.hamburger.active span:nth-child(3){
+    transform:rotate(-45deg) translate(6px,-6px);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+
+    .hamburger{
+        display:flex;
+    }
+
+    nav ul{
+        position:fixed;
+        top:0;
+        right:-100%;
+        width:260px;
+        height:100vh;
+        background:white;
+        flex-direction:column;
+        padding:100px 30px;
+        gap:25px;
+        transition:right 0.4s ease;
+        box-shadow:-5px 0 30px rgba(0,0,0,0.1);
+    }
+
+    nav ul.show{
+        right:0;
+    }
+}
+
+/* ================= HERO ================= */
+.package-hero{
+    height:70vh;
+    background-image:url('goa.jfif') , linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-blend-mode: overlay;
+    background-size: 1300px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    color:white;
+    overflow:hidden;
+}
+.package-hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,0.45);
+}
+.package-hero h1{
+    position:relative;
+    font-size:50px;
+    animation:fadeSlide 2s ease forwards;
+}
+
+/* Floating circles */
+.floating{
+    position:absolute;
+    width:80px;
+    height:80px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.1);
+    animation:float 6s infinite ease-in-out;
+}
+.floating:nth-child(1){ top:20%; left:10%; }
+.floating:nth-child(2){ bottom:20%; right:15%; animation-delay:2s; }
+
+@keyframes float{
+    0%,100%{ transform:translateY(0); }
+    50%{ transform:translateY(-20px); }
+}
+
+/* ================= PACKAGE CARDS ================= */
+.package-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:40px;
+    margin-top:60px;
+}
+
+.package-card{
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+    transition:0.5s;
+    transform-style:preserve-3d;
+    position:relative;
+}
+.package-card:hover{
+    transform:rotateY(8deg) rotateX(8deg) translateY(-10px);
+    box-shadow:0 30px 70px rgba(0,0,0,0.2);
+}
+
+.package-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    transition:0.5s;
+}
+.package-card:hover img{
+    transform:scale(1.1);
+}
+
+.package-content{
+    padding:25px;
+}
+
+.price{
+    font-size:22px;
+    font-weight:bold;
+    color:silver;
+    text-shadow:0 0 8px rgba(192,192,192,0.8);
+}
+
+.features{
+    margin:15px 0;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* Glow button */
+.book-btn{
+    padding:10px 25px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,silver,#aaa);
+    cursor:pointer;
+    font-weight:600;
+    transition:0.4s;
+}
+.book-btn:hover{
+    box-shadow:0 0 20px rgba(192,192,192,1);
+    transform:scale(1.05);
+}
+
+/* Section styling */
+.packages-section{
+    padding:100px 8%;
+    background:linear-gradient(to bottom,#fff,#f2f2f2);
+}
+
+/* Scroll animation */
+.reveal{
+    opacity:0;
+    transform:translateY(60px);
+    transition:1s ease;
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* Responsive */
+@media(max-width:768px){
+    .package-hero h1{font-size:32px;}
+}
+
+/* ================= WHY SECTION ================= */
+
+.why-section{
+    padding:100px 8%;
+    background:#fafafa;
+    text-align:center;
+}
+
+.why-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:40px;
+    margin-top:50px;
+}
+
+.why-box{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 15px 40px rgba(0,0,0,0.08);
+    transition:0.4s;
+}
+.why-box:hover{
+    transform:translateY(-10px);
+    box-shadow:0 25px 60px rgba(0,0,0,0.15);
+}
+
+.why-icon{
+    font-size:40px;
+    margin-bottom:15px;
+    animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
+
+.ultra-packages-section{
+    padding:120px 5%;
+    background:#0e0e1f;
+    color:white;
+    position:relative;
+    overflow:hidden;
+}
+
+/* HEADER */
+.packages-header{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+/* FLOATING ICONS */
+.pkg-icon{
+    position:absolute;
+    font-size:26px;
+    animation:float 6s infinite ease-in-out;
+}
+.pi1{top:10%;left:5%;}
+.pi2{top:40%;right:6%;}
+.pi3{bottom:15%;left:50%;}
+.pi4{top:60%;right:35%;}
+
+/* GRID */
+.ultra-package-container{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:30px;
+}
+
+/* CARD */
+.ultra-package-card{
+    background:#1a1a2e;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.5s;
+    position:relative;
+    transform-style:preserve-3d;
+}
+.ultra-package-card:hover{
+    transform:rotateY(10deg) rotateX(5deg) scale(1.05);
+}
+
+.ultra-package-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.ultra-package-content{
+    padding:20px;
+}
+
+/* LIGHT SWEEP */
+.ultra-package-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:50%;
+    height:100%;
+    background:rgba(255,255,255,0.1);
+    transform:skewX(-25deg);
+    transition:0.8s;
+}
+.ultra-package-card:hover::before{
+    left:150%;
+}
+
+/* LOADER */
+.loader{
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:40px;
+    height:40px;
+    border:4px solid silver;
+    border-top:4px solid transparent;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+    transform:translate(-50%,-50%);
+}
+
+/* BUTTON */
+.book-btn{
+    padding:10px 20px;
+    background:silver;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.4s;
+}
+.book-btn:hover{
+    box-shadow:0 0 20px silver;
+}
+
+/* CUBE */
+.cube-container{
+    width:200px;
+    height:200px;
+    margin:60px auto;
+    perspective:800px;
+}
+.cube{
+    width:100%;
+    height:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    animation:rotateCube 10s infinite linear;
+}
+.face{
+    position:absolute;
+    width:200px;
+    height:200px;
+    background:linear-gradient(45deg,silver,#444);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* PRISM */
+.prism-container{
+    width:150px;
+    height:150px;
+    margin:40px auto;
+    perspective:800px;
+}
+.prism{
+    width:100px;
+    height:100px;
+    background:linear-gradient(45deg,silver,#888);
+    transform-style:preserve-3d;
+    animation:rotatePrism 8s infinite linear;
+}
+
+/* ANIMATIONS */
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(-20px);}
+}
+@keyframes spin{
+    100%{transform:translate(-50%,-50%) rotate(360deg);}
+}
+@keyframes rotateCube{
+    from{transform:rotateX(0) rotateY(0);}
+    to{transform:rotateX(360deg) rotateY(360deg);}
+}
+@keyframes rotatePrism{
+    from{transform:rotateY(0);}
+    to{transform:rotateY(360deg);}
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .cube-container{width:150px;height:150px;}
+}
+
+/* ================= CTA ================= */
+
+.cta-section{
+    padding:100px 8%;
+    background:linear-gradient(45deg,#e6e6e6,#ffffff);
+    text-align:center;
+}
+
+.cta-btn{
+    margin-top:20px;
+    padding:14px 35px;
+    border:none;
+    border-radius:30px;
+    background:silver;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.4s;
+}
+.cta-btn:hover{
+    box-shadow:0 0 25px rgba(192,192,192,1);
+    transform:scale(1.05);
+}
+
+/* ================= FOOTER ================= */
+.ultra-footer {
+    background: #111827;
+    color: white;
+    padding: 60px 10%;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 40px;
+}
+
+.footer-grid h3,
+.footer-grid h4 {
+    margin-bottom: 15px;
+}
+
+.footer-grid a {
+    display: block;
+    color: #d1d5db;
+    margin-bottom: 8px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-grid a:hover {
+    color: #00ffff;
+    transform: translateX(5px);
+}
+
+/* Social Icons */
+.social-icons {
+    margin-top: 15px;
+    display: flex;
+    gap: 25px;
+}
+
+.social {
+    font-size: 20px;
+    margin-right: 15px;
+    color: white;
+    transition: 0.3s ease;
+}
+
+.social:hover {
+    transform: scale(1.2);
+}
+
+.instagram:hover { color: #E1306C; }
+.whatsapp:hover { color: #25D366; }
+.facebook:hover { color: #1877F2; }
+.twitter:hover { color: #1DA1F2; }
+
+/* Newsletter */
+.ultra-footer input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.glow-btn {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    background: #00ffff;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.glow-btn:hover {
+    box-shadow: 0 0 15px #00ffff;
+}
+
+#subscribeMessage {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    opacity: 0.7;
+}
+
+/* Mobile Friendly */
+@media (max-width: 768px) {
+    .ultra-footer {
+        padding: 40px 5%;
+    }
+}
+
+copyright{
+    text-align:center;
+    margin-top:30px;
+}
+
+/* ================= MOBILE IMPROVEMENTS ================= */
+
+@media(max-width:768px){
+
+    .package-container{
+        grid-template-columns:1fr;
+    }
+
+    .package-card{
+        margin-bottom:30px;
+    }
+
+    .package-hero{
+        height:60vh;
+    }
+
+    .package-hero h1{
+        font-size:28px;
+        padding:0 15px;
+    }
+
+    .why-container{
+        grid-template-columns:1fr;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+    }
+}
+/* ================= LOGO ================= */
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#222;
+    cursor:pointer;
+    position:relative;
+}
+
+/* Bigger Logo Image */
+
+.logo img{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+    transition:0.5s ease;
+}
+
+/* Text styling */
+
+.logo span{
+    position:relative;
+    background:linear-gradient(90deg,#555,#999,#555);
+    background-size:200%;
+    background:linear-gradient(45deg,silver,#999);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+    -webkit-text-fill-color:transparent;
+    animation:logoShine 5s linear infinite;
+}
+
+/* Shine animation */
+
+@keyframes logoShine{
+    0%{background-position:0%}
+    100%{background-position:200%}
+}
+
+/* Hover animation like premium travel sites */
+
+.logo:hover img{
+    transform:scale(1.1) rotate(-5deg);
+}
+
+.logo:hover span{
+    letter-spacing:2px;
+}
+
+/* Soft glow */
+
+.logo::after{
+    content:"";
+    position:absolute;
+    inset:-5px;
+    border-radius:10px;
+    opacity:0;
+    background:radial-gradient(circle, rgba(192,192,192,0.4), transparent);
+    transition:0.4s;
+}
+
+.logo:hover::after{
+    opacity:1;
+}
+
+@media(max-width:768px){
+
+.logo{
+    font-size:22px;
+    gap:8px;
+}
+
+.logo img{
+    width:42px;
+    height:42px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+   <h2 class="logo">
+    <img src="lega.png" alt="LegacyTours Logo">
+    <span>LegacyTours</span>
+    </h2>
+
+    <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <ul id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="packages.html" class="active">Tour Packages</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="videos.html">Videos</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+    </ul>
+</nav>
+
+<!-- HERO -->
+<section class="package-hero">
+<div class="floating"></div>
+<div class="floating"></div>
+<h1>Discover Luxury Tour Packages</h1>
+</section>
+
+<!-- PACKAGES -->
+<section class="ultra-packages-section">
+
+    <!-- HEADER -->
+    <div class="packages-header reveal-left">
+        <h2><span class="typing-packages"></span></h2>
+        <p>Luxury Domestic & International Experiences Crafted For You</p>
+    </div>
+
+    <!-- FLOATING ICONS -->
+    <div class="pkg-icon pi1">✈</div>
+    <div class="pkg-icon pi2">🌍</div>
+    <div class="pkg-icon pi3">🏖</div>
+    <div class="pkg-icon pi4">🏔</div>
+
+    <div class="ultra-package-container">
+
+        <!-- PARIS -->
+        <div class="ultra-package-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34">
+            <div class="ultra-package-content">
+                <h3>Paris Luxury Escape</h3>
+                <p class="price">$1,999</p>
+                <p>5-Star Hotel • Eiffel Dinner • Private City Tour • Airport Transfer</p>
+                <button class="book-btn" onclick="bookNow('Paris')">Book Now</button>
+            </div>
+        </div>
+
+        <!-- MALDIVES -->
+        <div class="ultra-package-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+            <div class="ultra-package-content">
+                <h3>Maldives Premium Retreat</h3>
+                <p class="price">$2,499</p>
+                <p>Water Villa • Private Yacht • Spa Session • Snorkeling</p>
+                <button class="book-btn" onclick="bookNow('Maldives')">Book Now</button>
+            </div>
+        </div>
+
+        <!-- DUBAI -->
+        <div class="ultra-package-card reveal-left">
+            <div class="loader"></div>
+            <img src="dubai.jpg">
+            <div class="ultra-package-content">
+                <h3>Dubai Royal Tour</h3>
+                <p class="price">$1,699</p>
+                <p>Desert Safari • Burj Khalifa • Luxury Stay • Dhow Cruise</p>
+                <button class="book-btn" onclick="bookNow('Dubai')">Book Now</button>
+            </div>
+        </div>
+
+        <!-- GOA -->
+        <div class="ultra-package-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e">
+            <div class="ultra-package-content">
+                <h3>Goa Beach Vibes</h3>
+                <p class="price">₹29,999</p>
+                <p>Beach Resort • Water Sports • Cruise Party • Sunset Tour</p>
+                <button class="book-btn" onclick="bookNow('Goa')">Book Now</button>
+            </div>
+        </div>
+
+        <!-- MANALI -->
+        <div class="ultra-package-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b">
+            <div class="ultra-package-content">
+                <h3>Manali Snow Escape</h3>
+                <p class="price">₹24,999</p>
+                <p>Snow Adventure • Solang Valley • Private Cab • Bonfire Night</p>
+                <button class="book-btn" onclick="bookNow('Manali')">Book Now</button>
+            </div>
+        </div>
+
+        <!-- KERALA -->
+        <div class="ultra-package-card reveal-left">
+            <div class="loader"></div>
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470">
+            <div class="ultra-package-content">
+                <h3>Kerala Backwaters</h3>
+                <p class="price">₹34,999</p>
+                <p>Houseboat Stay • Ayurveda Spa • Tea Gardens • Wildlife Tour</p>
+                <button class="book-btn" onclick="bookNow('Kerala')">Book Now</button>
+            </div>
+        </div>
+
+    </div>
+
+  
+
+</section>
+<section class="why-section">
+
+<h2 class="reveal">Why Travel With LegacyTours?</h2>
+
+<div class="why-container">
+
+<div class="why-box reveal">
+<div class="why-icon">🌍</div>
+<h3>Global Destinations</h3>
+<p>We offer premium travel experiences across 40+ countries worldwide.</p>
+</div>
+
+<div class="why-box reveal">
+<div class="why-icon">💎</div>
+<h3>Luxury Experience</h3>
+<p>5-star hotels, private transport & exclusive curated activities.</p>
+</div>
+
+<div class="why-box reveal">
+<div class="why-icon">🛡</div>
+<h3>Safe & Secure</h3>
+<p>24/7 travel support and complete safety assurance for all trips.</p>
+</div>
+
+</div>
+
+</section>
+
+<footer class="ultra-footer">
+
+    <div class="footer-grid">
+
+        <!-- Brand -->
+        <div>
+            <h3>Legacy Travels</h3>
+            <p>Luxury Experiences Crafted With Passion.</p>
+
+            <!-- Social Icons -->
+            <div class="social-icons">
+                <a href="#" class="social instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://wa.me/919999999999" class="social whatsapp" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="#" class="social facebook" target="_blank">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social twitter" target="_blank">
+                    <i class="fab fa-twitter"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+            <h4>Quick Links</h4>
+            <a href="index.html">Home</a>
+            <a href="packages.html">Packages</a>
+            <a href="gallery.html">Gallery</a>
+            <a href="contact.html">Contact</a>
+        </div>
+
+        <!-- Contact -->
+        <div>
+            <h4>Contact</h4>
+            <p>Email: info@silvertravels.com</p>
+            <p>Phone: +91 99999 99999</p>
+        </div>
+
+        <!-- Newsletter -->
+        <div>
+            <h4>Newsletter</h4>
+            <input type="email" id="newsletterEmail" placeholder="Enter Email">
+            <button class="glow-btn" onclick="subscribe()">Subscribe</button>
+            <p id="subscribeMessage"></p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Silver Travels | All Rights Reserved
+    </div>
+
+</footer>
+
+<!-- Font Awesome CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+<script>
+
+/* Scroll reveal */
+function revealOnScroll(){
+    const reveals = document.querySelectorAll(".reveal");
+    for(let i=0;i<reveals.length;i++){
+        let windowHeight = window.innerHeight;
+        let elementTop = reveals[i].getBoundingClientRect().top;
+        let visiblePoint = 100;
+
+        if(elementTop < windowHeight - visiblePoint){
+            reveals[i].classList.add("active");
+        }
+    }
+}
+window.addEventListener("scroll", revealOnScroll);
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const hamburger = document.getElementById("hamburger");
+    const navLinks = document.getElementById("navLinks");
+
+    hamburger.addEventListener("click", function () {
+        hamburger.classList.toggle("active");
+        navLinks.classList.toggle("show");
+    });
+
+    document.querySelectorAll("#navLinks a").forEach(link => {
+        link.addEventListener("click", function () {
+            hamburger.classList.remove("active");
+            navLinks.classList.remove("show");
+        });
+    });
+
+});
+
+// Typing
+const pkgText="Our Premium Travel Packages";
+let p=0;
+function typePkg(){
+    if(p<pkgText.length){
+        document.querySelector(".typing-packages").innerHTML+=pkgText.charAt(p);
+        p++;
+        setTimeout(typePkg,100);
+    }
+}
+typePkg();
+
+// Remove loader
+document.querySelectorAll(".ultra-package-card img").forEach(img=>{
+    img.onload=function(){
+        this.previousElementSibling.style.display="none";
+    }
+});
+
+// Scroll reveal
+window.addEventListener("scroll",()=>{
+    document.querySelectorAll(".reveal-left").forEach(el=>{
+        const pos=el.getBoundingClientRect().top;
+        if(pos<window.innerHeight-100){
+            el.classList.add("active");
+        }
+    });
+});
+
+// Button function
+function bookNow(place){
+    alert("Redirecting to booking for "+place);
+}
+
+function subscribe() {
+    let email = document.getElementById("newsletterEmail").value;
+    let message = document.getElementById("subscribeMessage");
+
+    if (email === "") {
+        message.style.color = "red";
+        message.innerHTML = "Please enter your email!";
+    } else {
+        message.style.color = "lightgreen";
+        message.innerHTML = "Subscribing...";
+
+        setTimeout(() => {
+            message.innerHTML = "Successfully Subscribed!";
+        }, 1200);
+    }
+}
+
+</script>
+
+</body>
+</html>
